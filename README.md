@@ -8,7 +8,7 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 - **Predefined column mapping** combines metadata from `exportify.app` with audio features from `exportify.net`.
 - **Smart file detection** – upload files in any order; the tool automatically identifies which is from `.app` and which from `.net`.
 - **Preview** the first 20 rows of the merged result.
-- **Custom output filename** – name your merged file before downloading (default: `YOUR-FILE.csv`).
+- **Custom output filename** – name your merged file before downloading.
 - **100% client‑side** – no server, no upload, works offline once downloaded.
 - **Self‑contained** – includes the [Papa Parse](https://www.papaparse.com/) library locally, so no external dependencies.
 
@@ -71,7 +71,7 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 2. In the tool, click **Choose File** for **File 1** and select one of the CSV files.
 3. Click **Choose File** for **File 2** and select the other CSV file.  
    *(The order doesn't matter – the tool automatically detects which file is from exportify.app and which from exportify.net.)*
-4. Optionally change the **output filename** (default: `Playlist-Merger`).
+4. Enter the **output filename**.
 5. Click **Merge & Preview** – the first 20 rows of the merged data will appear.
 6. Click **Download merged CSV** to save the complete file.
 
