@@ -6,8 +6,9 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 - **Merge two CSV exports** of the same Spotify playlist.
 - **Outer join on `Track URI`** – no data is lost; tracks appearing in only one file are still included.
 - **Predefined column mapping** combines metadata from `exportify.app` with audio features from `exportify.net`.
+- **Smart file detection** – upload files in any order; the tool automatically identifies which is from `.app` and which from `.net`.
 - **Preview** the first 20 rows of the merged result.
-- **Custom output filename** – name your merged file before downloading.
+- **Custom output filename** – name your merged file before downloading (default: `Playlist-Merger.csv`).
 - **100% client‑side** – no server, no upload, works offline once downloaded.
 - **Self‑contained** – includes the [Papa Parse](https://www.papaparse.com/) library locally, so no external dependencies.
 
@@ -55,8 +56,7 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 ## 🚀 How to Use
 
 ### Option 1: Use the hosted version (GitHub Pages)
-1. Go to the live tool at `https://thebrama0.github.io/Exportify-Playlist-Merger/`.
-
+1. Go to the live tool at [https://thebrama0.github.io/Exportify-Playlist-Merger/](https://thebrama0.github.io/Exportify-Playlist-Merger/).
 
 ### Option 2: Run locally (offline)
 1. **Download the repository** as a ZIP from GitHub and extract it, or clone it.
@@ -68,14 +68,14 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 ### Using the tool
 1. **Export the same playlist** from both [exportify.app](https://exportify.app) and [exportify.net](https://exportify.net).  
    - Keep the files as downloaded; you don't need to rename them.
-2. In the tool, click **Choose File** for **File 1** and select the CSV from **exportify.app**.
-3. Click **Choose File** for **File 2** and select the CSV from **exportify.net**.
-4. Optionally change the **output filename** (default: `merged_playlist`).
+2. In the tool, click **Choose File** for **File 1** and select one of the CSV files.
+3. Click **Choose File** for **File 2** and select the other CSV file.  
+   *(The order doesn't matter – the tool automatically detects which file is from exportify.app and which from exportify.net.)*
+4. Optionally change the **output filename** (default: `Playlist-Merger`).
 5. Click **Merge & Preview** – the first 20 rows of the merged data will appear.
 6. Click **Download merged CSV** to save the complete file.
 
 ## ⚠️ Important Notes
-- **File order matters:** The first file must be from `exportify.app`, the second from `exportify.net`. Swapping them will break the column mapping.
 - **Same playlist:** For best results, export the identical playlist from both services. If the playlists differ, tracks unique to one side will still appear, but some columns will be empty.
 - **No data leaves your device:** All processing is done locally in your browser – your CSV files are never uploaded to any server.
 - **Offline ready:** Because the Papa Parse library is included locally, the tool works completely offline after you've downloaded the repository.
@@ -85,4 +85,4 @@ This project is open source under the [MIT License](LICENSE). Feel free to modif
 
 ---
 
-**Made for Exportify users – because combining metadata and audio features shouldn't be a hassle.**
+**Made for Exportify users – because combining metadata shouldn't be a hassle.**
