@@ -8,7 +8,7 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 - **Predefined column mapping** combines metadata from `exportify.app` with audio features from `exportify.net`.
 - **Smart file detection** – upload files in any order; the tool automatically identifies which is from `.app` and which from `.net`.
 - **Preview** the first 20 rows of the merged result.
-- **Custom output filename** – name your merged file before downloading (default: `Playlist-Merger.csv`).
+- **Custom output filename** – name your merged file before downloading (default: `YOUR-FILE.csv`).
 - **100% client‑side** – no server, no upload, works offline once downloaded.
 - **Self‑contained** – includes the [Papa Parse](https://www.papaparse.com/) library locally, so no external dependencies.
 
@@ -56,7 +56,7 @@ A pure HTML/JavaScript tool that merges CSV files exported from **exportify.app*
 ## 🚀 How to Use
 
 ### Option 1: Use the hosted version (GitHub Pages)
-1. Go to the live tool at [https://thebrama0.github.io/Exportify-Playlist-Merger/](https://thebrama0.github.io/Exportify-Playlist-Merger/).
+1. Go to the live tool at [https://thebrama0.github.io/Exportify-CSV-Compiler-Tool/](https://thebrama0.github.io/Exportify-CSV-Compiler-Tool/).
 
 ### Option 2: Run locally (offline)
 1. **Download the repository** as a ZIP from GitHub and extract it, or clone it.
