@@ -2,25 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Exportify CSV Compiler Tool: Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file</title>
-    <meta name="description" content="Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file. 100% client-side, private, and free.">
-    <meta name="keywords" content="exportify, spotify playlist, csv merge, exportify.app, exportify.net, playlist merger">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Exportify CSV Compiler Tool | Merge Spotify Playlist Exports</title>
+    <meta name="description" content="Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file. Fully responsive, 100% client-side, private, and free.">
+    <meta name="keywords" content="exportify, spotify playlist, csv merge, exportify.app, exportify.net, playlist merger, responsive tool">
     <meta name="google-site-verification" content="BVp2DPHAOZgw9jpL1blKMX-tbrx3THhXlzi66JEa5As" />
     
-    <!-- Open Graph tags -->
-    <meta property="og:title" content="Exportify CSV Compiler Tool: Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file">
-    <meta property="og:description" content="Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file. 100% client‑side, private, free.">
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Exportify CSV Compiler Tool: Merge Spotify Playlist Data">
+    <meta property="og:description" content="Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file. Works flawlessly on any screen size.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thebrama0.github.io/Exportify-Playlist-Merger/">
-    <!-- <meta property="og:image" content="https://thebrama0.github.io/Exportify-Playlist-Merger/preview-image.png"> -->
     
-    <!-- Twitter Card tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Exportify CSV Compiler Tool: Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file">
-    <meta name="twitter:description" content="Merge CSV files from exportify.app and exportify.net into one comprehensive CSV file. 100% client‑side, private, free.">
-    <!-- <meta name="twitter:image" content="https://thebrama0.github.io/Exportify-Playlist-Merger/preview-image.png"> -->
+    <meta name="twitter:title" content="Exportify CSV Compiler Tool">
+    <meta name="twitter:description" content="Merge exportify.app & exportify.net playlists. Responsive, private, and fast.">
     
-    <!-- Structured data (JSON-LD) -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -37,482 +35,693 @@
       "url": "https://thebrama0.github.io/Exportify-Playlist-Merger/"
     }
     </script>
-
+    
+    <!-- Papa Parse CDN (reliable, global) -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 2rem auto;
-            max-width: 900px;
-            padding: 0 20px;
-            line-height: 1.6;
-            color: #333;
-        }
-        h1 {
-            color: #1db954;
-            border-bottom: 2px solid #1db954;
-            padding-bottom: 0.5rem;
-        }
-        .container {
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .step {
-            background: #e8f5e9;
-            border-left: 4px solid #1db954;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-        .file-group {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: white;
-            border-radius: 4px;
-        }
-        label {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.3rem;
-        }
-        input[type="file"], input[type="text"] {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #f4f6fa;
+            margin: 0;
+            padding: 1rem;
+            line-height: 1.5;
+            color: #1a2c3e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main container - fluid & responsive */
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.5rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            color: #1db954;
+            border-left: 5px solid #1db954;
+            padding-left: 1rem;
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .sub {
+            color: #4a627a;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 0.75rem;
+        }
+
+        .step {
+            background: #ebf8ef;
+            border-left: 5px solid #1db954;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .step ul {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .step li {
+            margin: 0.3rem 0;
+        }
+
+        .file-group {
+            margin: 1.2rem 0;
+            padding: 0.5rem 0;
+            background: transparent;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        label {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #1e2f3e;
+            font-size: 0.95rem;
+        }
+
+        input[type="file"], input[type="text"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: #fefefe;
+            font-family: inherit;
+        }
+
+        input[type="file"]:hover, input[type="text"]:focus {
+            border-color: #1db954;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.2);
+        }
+
         button {
             background: #1db954;
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 1.5rem;
             font-size: 1rem;
-            border-radius: 4px;
+            font-weight: 600;
+            border-radius: 40px;
             cursor: pointer;
-            margin: 1rem 0;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 180px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
+
         button:hover {
             background: #169c46;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(29, 185, 84, 0.25);
         }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
         .preview {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 1rem;
-            max-height: 400px;
+            background: #ffffff;
+            border: 1px solid #eef2f6;
+            border-radius: 24px;
+            padding: 0;
+            max-height: 460px;
             overflow: auto;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            min-width: 700px;
         }
+
         th, td {
-            border: 1px solid #ccc;
-            padding: 4px;
+            border-bottom: 1px solid #e9edf2;
+            padding: 10px 8px;
             text-align: left;
             white-space: nowrap;
         }
+
         th {
-            background: #f0f0f0;
+            background: #f8fafd;
+            font-weight: 600;
+            color: #1e3a5f;
             position: sticky;
             top: 0;
+            backdrop-filter: blur(4px);
+            z-index: 10;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
         }
+
+        td {
+            color: #2c3e50;
+        }
+
+        .note {
+            background: #fef9e3;
+            border-left: 4px solid #ffb347;
+            padding: 0.9rem 1.2rem;
+            border-radius: 18px;
+            margin: 1.2rem 0;
+            font-size: 0.85rem;
+            color: #5a4a1a;
+        }
+
         .download-btn {
             background: #1db954;
             color: white;
             border: none;
-            padding: 0.8rem 2rem;
+            padding: 0.85rem 2rem;
             font-size: 1rem;
-            border-radius: 4px;
+            border-radius: 40px;
             cursor: pointer;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
         }
-        .note {
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            margin: 1rem 0;
+
+        .download-btn:hover {
+            background: #0e8c42;
+            transform: scale(1.02);
         }
+
         .footer {
             margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.8rem;
+            color: #6c86a3;
             text-align: center;
+            border-top: 1px solid #e2edf7;
+            padding-top: 1.5rem;
+        }
+
+        #status {
+            font-weight: 500;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+        }
+
+        /* RESPONSIVE: 9:16 & 16:9 optimized */
+        @media (max-width: 780px) {
+            body {
+                padding: 0.75rem;
+            }
+            .container {
+                padding: 1.2rem;
+                border-radius: 24px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .step {
+                padding: 0.9rem;
+                margin: 1rem 0;
+            }
+            button, .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .file-group {
+                margin: 1rem 0;
+            }
+            th, td {
+                padding: 8px 6px;
+                font-size: 0.7rem;
+            }
+            table {
+                font-size: 0.7rem;
+            }
+            .preview {
+                max-height: 380px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 0.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.4rem;
+                padding-left: 0.8rem;
+            }
+            .step li {
+                font-size: 0.85rem;
+            }
+            input[type="file"], input[type="text"] {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.85rem;
+            }
+            button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 6px 4px;
+                white-space: nowrap;
+            }
+            .note {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* for very wide 16:9 (large desktops) */
+        @media (min-width: 1600px) {
+            .container {
+                max-width: 1500px;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 12px 10px;
+            }
+        }
+
+        /* Scrollbar style */
+        .preview::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .preview::-webkit-scrollbar-track {
+            background: #eef2f8;
+            border-radius: 10px;
+        }
+        .preview::-webkit-scrollbar-thumb {
+            background: #bdd3e8;
+            border-radius: 10px;
+        }
+
+        .flex-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0.5rem 0 1rem 0;
+        }
+        
+        @media (max-width: 600px) {
+            .flex-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
-    <!-- Papa Parse for CSV handling -->
-    <script src="papaparse.min.js"></script>
 </head>
 <body>
+<div class="container">
     <h1>🎵 Exportify CSV Compiler Tool</h1>
-    <div class="container">
-        <div class="step">
-            <strong>📌 Before you start:</strong>
-            <ul>
-                <li>Download the <strong>same playlist</strong> from both Exportify services:</li>
-                <li>🌐 <a href="https://exportify.app" target="_blank">exportify.app</a></li>
-                <li>🌐 <a href="https://exportify.net" target="_blank">exportify.net</a></li>
-                <li>Upload both files below – the tool will <strong>automatically detect</strong> which is which.</li>
-                <li>Make sure you export the identical playlist (same tracks) from both sites.</li>
-            </ul>
-        </div>
+    <div class="sub">Merge playlists from exportify.app + exportify.net → one unified CSV</div>
+    
+    <div class="step">
+        <strong>📌 How to use (optimized for any screen)</strong>
+        <ul>
+            <li>Download the <strong>same playlist</strong> from both services:</li>
+            <li>🌐 <a href="https://exportify.app" target="_blank" rel="noopener">exportify.app</a> &nbsp;|&nbsp; 🌐 <a href="https://exportify.net" target="_blank" rel="noopener">exportify.net</a></li>
+            <li>Upload both CSV files below — the tool <strong>auto-detects</strong> source.</li>
+            <li>All data stays in your browser — zero privacy risk.</li>
+        </ul>
+    </div>
 
-        <div class="file-group">
-            <label>📂 File 1 (from either exportify.app or .net)</label>
-            <input type="file" id="file1" accept=".csv">
-        </div>
+    <div class="file-group">
+        <label>📂 File 1 (exportify.app OR exportify.net)</label>
+        <input type="file" id="file1" accept=".csv">
+    </div>
 
-        <div class="file-group">
-            <label>📂 File 2 (the other one)</label>
-            <input type="file" id="file2" accept=".csv">
-        </div>
+    <div class="file-group">
+        <label>📂 File 2 (the other export source)</label>
+        <input type="file" id="file2" accept=".csv">
+    </div>
 
-        <div class="file-group">
-            <label>📝 Output filename (without extension)</label>
-            <input type="text" id="outputName" value="" placeholder="e.g., my_merged_playlist">
-        </div>
+    <div class="file-group">
+        <label>✏️ Output filename (optional)</label>
+        <input type="text" id="outputName" placeholder="e.g., my_complete_playlist" value="">
+    </div>
 
+    <div class="flex-buttons">
         <button onclick="mergeFiles()">🔄 Merge & Preview</button>
-        <div id="status"></div>
-        <div id="preview" class="preview"></div>
-        <div id="download"></div>
-
-        <div class="note">
-            ⚠️ <strong>Important:</strong> The merge is performed on <code>Track URI</code>. If a track appears in only one file, it will still appear in the output with empty cells for the missing file's columns. This ensures you don't lose any data.
-        </div>
     </div>
-    <div class="footer">
-        Made for Exportify users · All processing happens in your browser – files never leave your device.
+    
+    <div id="status" style="font-size:0.9rem;"></div>
+    <div id="preview" class="preview"></div>
+    <div id="download"></div>
+
+    <div class="note">
+        ⚡ <strong>Smart outer join:</strong> Merged by <code>Track URI</code>. Tracks found in only one file are preserved with empty fields. 
+        The result includes <strong>34 columns</strong> combining rich metadata + audio features.
     </div>
+</div>
+<div class="footer">
+    ✨ Fully responsive — works perfectly in 9:16 (portrait) & 16:9 (landscape) · 100% client-side, private, free.
+</div>
 
-    <script>
-        let mergedData = null; // store merged rows for download
+<script>
+    let mergedData = null;
 
-        function mergeFiles() {
-            const file1 = document.getElementById('file1').files[0];
-            const file2 = document.getElementById('file2').files[0];
-            const outputName = document.getElementById('outputName').value.trim() || 'merged_playlist';
+    // Main merge function
+    async function mergeFiles() {
+        const file1 = document.getElementById('file1').files[0];
+        const file2 = document.getElementById('file2').files[0];
+        let outputName = document.getElementById('outputName').value.trim();
+        if (!outputName) outputName = 'merged_playlist';
 
-            if (!file1 || !file2) {
-                document.getElementById('status').innerHTML = '<span style="color:red;">❌ Please select both CSV files.</span>';
-                return;
-            }
+        const statusDiv = document.getElementById('status');
+        const previewDiv = document.getElementById('preview');
+        const downloadDiv = document.getElementById('download');
 
-            document.getElementById('status').innerHTML = '⏳ Parsing files...';
-            document.getElementById('preview').innerHTML = '';
-            document.getElementById('download').innerHTML = '';
+        if (!file1 || !file2) {
+            statusDiv.innerHTML = '<span style="color:#d1453b;">❌ Please select both CSV files.</span>';
+            return;
+        }
 
-            // Parse both files
-            Promise.all([
-                parseCSV(file1),
-                parseCSV(file2)
-            ]).then(([data1, data2]) => {
-                // Detect which file is from exportify.app and which from exportify.net
-                const columns1 = data1.length > 0 ? Object.keys(data1[0]) : [];
-                const columns2 = data2.length > 0 ? Object.keys(data2[0]) : [];
+        statusDiv.innerHTML = '⏳ Parsing & analyzing files...';
+        previewDiv.innerHTML = '';
+        downloadDiv.innerHTML = '';
 
-                // Unique columns for exportify.app (file1 in original mapping)
-                const appColumns = ['Artist URI(s)', 'Album URI', 'Album Artist URI(s)', 'Album Artist Name(s)', 'Album Release Date', 'Album Image URL', 'Disc Number', 'Track Number', 'Track Preview URL', 'ISRC'];
-                // Unique columns for exportify.net (file2 in original mapping)
-                const netColumns = ['Duration (ms)', 'Genres', 'Record Label', 'Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Time Signature', 'Release Date'];
+        try {
+            const [data1, data2] = await Promise.all([
+                parseCSVFile(file1),
+                parseCSVFile(file2)
+            ]);
 
-                const score1app = appColumns.filter(col => columns1.includes(col)).length;
-                const score1net = netColumns.filter(col => columns1.includes(col)).length;
-                const score2app = appColumns.filter(col => columns2.includes(col)).length;
-                const score2net = netColumns.filter(col => columns2.includes(col)).length;
+            // Detect which file is from exportify.app (rich in app-specific columns) and which is .net
+            const columns1 = data1.length > 0 ? Object.keys(data1[0]) : [];
+            const columns2 = data2.length > 0 ? Object.keys(data2[0]) : [];
 
-                // Decide: file with higher app score is the .app file
-                let appData, netData;
-                if (score1app > score2app) {
-                    appData = data1;
-                    netData = data2;
-                } else if (score2app > score1app) {
-                    appData = data2;
+            // Unique columns for each service (distinctive)
+            const appDistinctive = ['Artist URI(s)', 'Album URI', 'Album Artist URI(s)', 'Album Artist Name(s)', 'Album Release Date', 'Album Image URL', 'Disc Number', 'Track Number', 'Track Preview URL', 'ISRC'];
+            const netDistinctive = ['Duration (ms)', 'Genres', 'Record Label', 'Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness', 'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Time Signature', 'Release Date'];
+
+            const score1App = appDistinctive.filter(c => columns1.includes(c)).length;
+            const score1Net = netDistinctive.filter(c => columns1.includes(c)).length;
+            const score2App = appDistinctive.filter(c => columns2.includes(c)).length;
+            const score2Net = netDistinctive.filter(c => columns2.includes(c)).length;
+
+            let appData, netData;
+            if (score1App > score2App) {
+                appData = data1;
+                netData = data2;
+            } else if (score2App > score1App) {
+                appData = data2;
+                netData = data1;
+            } else {
+                // fallback using net scores
+                if (score1Net > score2Net) {
                     netData = data1;
+                    appData = data2;
                 } else {
-                    // If scores are equal, fall back to net scores
-                    if (score1net > score2net) {
-                        netData = data1;
-                        appData = data2;
-                    } else {
-                        netData = data2;
-                        appData = data1;
-                    }
+                    netData = data2;
+                    appData = data1;
                 }
+            }
 
-                // Now build lookup from netData by Track URI
-                const lookup = {};
-                netData.forEach(row => {
-                    const uri = row['Track URI'];
-                    if (uri) lookup[uri] = row;
-                });
+            // Build fast lookup on netData by Track URI
+            const netLookup = new Map();
+            for (const row of netData) {
+                const uri = row['Track URI'];
+                if (uri) netLookup.set(uri, row);
+            }
 
-                // Final column order (34 columns)
-                const finalColumns = [
-                    'Track URI',
-                    'Track Name',
-                    'Artist URI(s)',
-                    'Artist Name(s)',
-                    'Album URI',
-                    'Album Name',
-                    'Album Artist URI(s)',
-                    'Album Artist Name(s)',
-                    'Album Release Date',
-                    'Album Image URL',
-                    'Disc Number',
-                    'Track Number',
-                    'Track Duration (ms)',
-                    'Track Preview URL',
-                    'Explicit',
-                    'Popularity',
-                    'ISRC',
-                    'Added By',
-                    'Added At',
-                    'Release Date',
-                    'Genres',
-                    'Record Label',
-                    'Danceability',
-                    'Energy',
-                    'Key',
-                    'Loudness',
-                    'Mode',
-                    'Speechiness',
-                    'Acousticness',
-                    'Instrumentalness',
-                    'Liveness',
-                    'Valence',
-                    'Tempo',
-                    'Time Signature'
-                ];
+            // Final column order (34 columns) consistent & comprehensive
+            const finalColumns = [
+                'Track URI', 'Track Name', 'Artist URI(s)', 'Artist Name(s)', 'Album URI', 'Album Name',
+                'Album Artist URI(s)', 'Album Artist Name(s)', 'Album Release Date', 'Album Image URL',
+                'Disc Number', 'Track Number', 'Track Duration (ms)', 'Track Preview URL', 'Explicit',
+                'Popularity', 'ISRC', 'Added By', 'Added At', 'Release Date', 'Genres', 'Record Label',
+                'Danceability', 'Energy', 'Key', 'Loudness', 'Mode', 'Speechiness', 'Acousticness',
+                'Instrumentalness', 'Liveness', 'Valence', 'Tempo', 'Time Signature'
+            ];
 
-                const mergedRows = [];
+            const mergedRows = [];
+            const processedUris = new Set();
 
-                // Process all rows from appData (exportify.app)
-                appData.forEach(row1 => {
-                    const uri = row1['Track URI'];
-                    const row2 = lookup[uri] || {};
-                    const merged = {};
+            // 1) Process all rows from appData (exportify.app)
+            for (const appRow of appData) {
+                const uri = appRow['Track URI'];
+                if (!uri) continue;
+                processedUris.add(uri);
+                const netRow = netLookup.get(uri) || {};
+                
+                const merged = {};
+                // base URI
+                merged['Track URI'] = uri;
+                merged['Track Name'] = coalesce(netRow['Track Name'], appRow['Track Name']);
+                merged['Artist URI(s)'] = appRow['Artist URI(s)'] || '';
+                merged['Artist Name(s)'] = appRow['Artist Name(s)'] || '';
+                merged['Album URI'] = appRow['Album URI'] || '';
+                merged['Album Name'] = coalesce(netRow['Album Name'], appRow['Album Name']);
+                merged['Album Artist URI(s)'] = appRow['Album Artist URI(s)'] || '';
+                merged['Album Artist Name(s)'] = appRow['Album Artist Name(s)'] || '';
+                merged['Album Release Date'] = appRow['Album Release Date'] || '';
+                merged['Album Image URL'] = appRow['Album Image URL'] || '';
+                merged['Disc Number'] = appRow['Disc Number'] || '';
+                merged['Track Number'] = appRow['Track Number'] || '';
+                // Track Duration: from net's Duration (ms) or app's fallback
+                merged['Track Duration (ms)'] = coalesce(netRow['Duration (ms)'], appRow['Track Duration (ms)']);
+                merged['Track Preview URL'] = appRow['Track Preview URL'] || '';
+                merged['Explicit'] = coalesce(netRow['Explicit'], appRow['Explicit']);
+                merged['Popularity'] = coalesce(netRow['Popularity'], appRow['Popularity']);
+                merged['ISRC'] = appRow['ISRC'] || '';
+                merged['Added By'] = coalesce(netRow['Added By'], appRow['Added By']);
+                merged['Added At'] = coalesce(netRow['Added At'], appRow['Added At']);
+                
+                // net-specific fields
+                merged['Release Date'] = netRow['Release Date'] || '';
+                merged['Genres'] = netRow['Genres'] || '';
+                merged['Record Label'] = netRow['Record Label'] || '';
+                merged['Danceability'] = netRow['Danceability'] ?? '';
+                merged['Energy'] = netRow['Energy'] ?? '';
+                merged['Key'] = netRow['Key'] ?? '';
+                merged['Loudness'] = netRow['Loudness'] ?? '';
+                merged['Mode'] = netRow['Mode'] ?? '';
+                merged['Speechiness'] = netRow['Speechiness'] ?? '';
+                merged['Acousticness'] = netRow['Acousticness'] ?? '';
+                merged['Instrumentalness'] = netRow['Instrumentalness'] ?? '';
+                merged['Liveness'] = netRow['Liveness'] ?? '';
+                merged['Valence'] = netRow['Valence'] ?? '';
+                merged['Tempo'] = netRow['Tempo'] ?? '';
+                merged['Time Signature'] = netRow['Time Signature'] ?? '';
+                
+                mergedRows.push(merged);
+            }
 
-                    merged['Track URI'] = uri;
+            // 2) Add rows that exist ONLY in netData (not in appData)
+            for (const netRow of netData) {
+                const uri = netRow['Track URI'];
+                if (!uri || processedUris.has(uri)) continue;
+                
+                const merged = {};
+                merged['Track URI'] = uri;
+                merged['Track Name'] = netRow['Track Name'] || '';
+                merged['Artist URI(s)'] = '';
+                merged['Artist Name(s)'] = '';
+                merged['Album URI'] = '';
+                merged['Album Name'] = netRow['Album Name'] || '';
+                merged['Album Artist URI(s)'] = '';
+                merged['Album Artist Name(s)'] = '';
+                merged['Album Release Date'] = '';
+                merged['Album Image URL'] = '';
+                merged['Disc Number'] = '';
+                merged['Track Number'] = '';
+                merged['Track Duration (ms)'] = netRow['Duration (ms)'] || '';
+                merged['Track Preview URL'] = '';
+                merged['Explicit'] = netRow['Explicit'] || '';
+                merged['Popularity'] = netRow['Popularity'] || '';
+                merged['ISRC'] = '';
+                merged['Added By'] = netRow['Added By'] || '';
+                merged['Added At'] = netRow['Added At'] || '';
+                merged['Release Date'] = netRow['Release Date'] || '';
+                merged['Genres'] = netRow['Genres'] || '';
+                merged['Record Label'] = netRow['Record Label'] || '';
+                merged['Danceability'] = netRow['Danceability'] ?? '';
+                merged['Energy'] = netRow['Energy'] ?? '';
+                merged['Key'] = netRow['Key'] ?? '';
+                merged['Loudness'] = netRow['Loudness'] ?? '';
+                merged['Mode'] = netRow['Mode'] ?? '';
+                merged['Speechiness'] = netRow['Speechiness'] ?? '';
+                merged['Acousticness'] = netRow['Acousticness'] ?? '';
+                merged['Instrumentalness'] = netRow['Instrumentalness'] ?? '';
+                merged['Liveness'] = netRow['Liveness'] ?? '';
+                merged['Valence'] = netRow['Valence'] ?? '';
+                merged['Tempo'] = netRow['Tempo'] ?? '';
+                merged['Time Signature'] = netRow['Time Signature'] ?? '';
+                
+                mergedRows.push(merged);
+            }
 
-                    // Track Name: prefer netData, else appData
-                    merged['Track Name'] = coalesce(row2['Track Name'], row1['Track Name']);
+            mergedData = mergedRows;
+            
+            // preview first 25 rows (or less)
+            const previewRows = mergedRows.slice(0, 25);
+            displayPreviewTable(previewRows, finalColumns);
+            generateDownloadButton(mergedRows, finalColumns, outputName);
+            
+            statusDiv.innerHTML = `✅ Success! Merged <strong>${mergedRows.length}</strong> tracks. (${appData.length} from exportify.app + ${netData.length} from exportify.net → full outer join)`;
+        } catch (err) {
+            console.error(err);
+            statusDiv.innerHTML = `<span style="color:#c0392b;">❌ Merge failed: ${err.message || 'Invalid CSV structure'}</span>`;
+        }
+    }
 
-                    // Artist URI(s): only from appData
-                    merged['Artist URI(s)'] = row1['Artist URI(s)'] || '';
-
-                    // Artist Name(s): from appData (not mapped to netData in final example)
-                    merged['Artist Name(s)'] = row1['Artist Name(s)'] || '';
-
-                    // Album URI: only from appData
-                    merged['Album URI'] = row1['Album URI'] || '';
-
-                    // Album Name: prefer netData, else appData
-                    merged['Album Name'] = coalesce(row2['Album Name'], row1['Album Name']);
-
-                    // Album Artist URI(s): only from appData
-                    merged['Album Artist URI(s)'] = row1['Album Artist URI(s)'] || '';
-
-                    // Album Artist Name(s): only from appData
-                    merged['Album Artist Name(s)'] = row1['Album Artist Name(s)'] || '';
-
-                    // Album Release Date: only from appData
-                    merged['Album Release Date'] = row1['Album Release Date'] || '';
-
-                    // Album Image URL: only from appData
-                    merged['Album Image URL'] = row1['Album Image URL'] || '';
-
-                    // Disc Number: only from appData
-                    merged['Disc Number'] = row1['Disc Number'] || '';
-
-                    // Track Number: only from appData
-                    merged['Track Number'] = row1['Track Number'] || '';
-
-                    // Track Duration (ms): prefer netData's Duration (ms), else appData's Track Duration (ms)
-                    merged['Track Duration (ms)'] = coalesce(row2['Duration (ms)'], row1['Track Duration (ms)']);
-
-                    // Track Preview URL: only from appData
-                    merged['Track Preview URL'] = row1['Track Preview URL'] || '';
-
-                    // Explicit: prefer netData, else appData
-                    merged['Explicit'] = coalesce(row2['Explicit'], row1['Explicit']);
-
-                    // Popularity: prefer netData, else appData
-                    merged['Popularity'] = coalesce(row2['Popularity'], row1['Popularity']);
-
-                    // ISRC: only from appData
-                    merged['ISRC'] = row1['ISRC'] || '';
-
-                    // Added By: prefer netData, else appData
-                    merged['Added By'] = coalesce(row2['Added By'], row1['Added By']);
-
-                    // Added At: prefer netData, else appData
-                    merged['Added At'] = coalesce(row2['Added At'], row1['Added At']);
-
-                    // Release Date: only from netData
-                    merged['Release Date'] = row2['Release Date'] || '';
-
-                    // Genres: only from netData
-                    merged['Genres'] = row2['Genres'] || '';
-
-                    // Record Label: only from netData
-                    merged['Record Label'] = row2['Record Label'] || '';
-
-                    // Audio features from netData
-                    merged['Danceability'] = row2['Danceability'] || '';
-                    merged['Energy'] = row2['Energy'] || '';
-                    merged['Key'] = row2['Key'] || '';
-                    merged['Loudness'] = row2['Loudness'] || '';
-                    merged['Mode'] = row2['Mode'] || '';
-                    merged['Speechiness'] = row2['Speechiness'] || '';
-                    merged['Acousticness'] = row2['Acousticness'] || '';
-                    merged['Instrumentalness'] = row2['Instrumentalness'] || '';
-                    merged['Liveness'] = row2['Liveness'] || '';
-                    merged['Valence'] = row2['Valence'] || '';
-                    merged['Tempo'] = row2['Tempo'] || '';
-                    merged['Time Signature'] = row2['Time Signature'] || '';
-
-                    mergedRows.push(merged);
-                });
-
-                // Include rows from netData that are not in appData (outer join)
-                netData.forEach(row2 => {
-                    const uri = row2['Track URI'];
-                    if (!appData.some(r => r['Track URI'] === uri)) {
-                        const merged = {};
-                        merged['Track URI'] = uri;
-                        merged['Track Name'] = row2['Track Name'] || '';
-                        merged['Artist URI(s)'] = '';
-                        merged['Artist Name(s)'] = '';
-                        merged['Album URI'] = '';
-                        merged['Album Name'] = row2['Album Name'] || '';
-                        merged['Album Artist URI(s)'] = '';
-                        merged['Album Artist Name(s)'] = '';
-                        merged['Album Release Date'] = '';
-                        merged['Album Image URL'] = '';
-                        merged['Disc Number'] = '';
-                        merged['Track Number'] = '';
-                        merged['Track Duration (ms)'] = row2['Duration (ms)'] || '';
-                        merged['Track Preview URL'] = '';
-                        merged['Explicit'] = row2['Explicit'] || '';
-                        merged['Popularity'] = row2['Popularity'] || '';
-                        merged['ISRC'] = '';
-                        merged['Added By'] = row2['Added By'] || '';
-                        merged['Added At'] = row2['Added At'] || '';
-                        merged['Release Date'] = row2['Release Date'] || '';
-                        merged['Genres'] = row2['Genres'] || '';
-                        merged['Record Label'] = row2['Record Label'] || '';
-                        merged['Danceability'] = row2['Danceability'] || '';
-                        merged['Energy'] = row2['Energy'] || '';
-                        merged['Key'] = row2['Key'] || '';
-                        merged['Loudness'] = row2['Loudness'] || '';
-                        merged['Mode'] = row2['Mode'] || '';
-                        merged['Speechiness'] = row2['Speechiness'] || '';
-                        merged['Acousticness'] = row2['Acousticness'] || '';
-                        merged['Instrumentalness'] = row2['Instrumentalness'] || '';
-                        merged['Liveness'] = row2['Liveness'] || '';
-                        merged['Valence'] = row2['Valence'] || '';
-                        merged['Tempo'] = row2['Tempo'] || '';
-                        merged['Time Signature'] = row2['Time Signature'] || '';
-
-                        mergedRows.push(merged);
+    function parseCSVFile(file) {
+        return new Promise((resolve, reject) => {
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                dynamicTyping: false,
+                complete: (results) => {
+                    if (results.errors && results.errors.length) {
+                        console.warn("CSV parse warnings:", results.errors);
                     }
-                });
-
-                mergedData = mergedRows;
-
-                // Preview first 20 rows
-                displayPreview(mergedRows.slice(0, 20), finalColumns);
-                showDownloadButton(mergedRows, finalColumns, outputName);
-
-                document.getElementById('status').innerHTML = `✅ Merged ${mergedRows.length} rows.`;
-            }).catch(error => {
-                document.getElementById('status').innerHTML = `<span style="color:red;">❌ Error: ${error.message}</span>`;
+                    resolve(results.data);
+                },
+                error: (err) => reject(err)
             });
+        });
+    }
+
+    function coalesce(...values) {
+        for (let val of values) {
+            if (val !== undefined && val !== null && val !== '') return val;
+        }
+        return '';
+    }
+
+    function displayPreviewTable(rows, columns) {
+        const container = document.getElementById('preview');
+        if (!rows || rows.length === 0) {
+            container.innerHTML = '<div style="padding: 1.5rem; text-align:center;">✨ No data to preview. Upload files and merge.</div>';
+            return;
         }
 
-        function parseCSV(file) {
-            return new Promise((resolve, reject) => {
-                Papa.parse(file, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: (results) => resolve(results.data),
-                    error: (err) => reject(err)
-                });
-            });
+        let html = '<div style="overflow-x: auto;"><table><thead><tr>';
+        for (let col of columns) {
+            html += `<th>${escapeHtml(col)}</th>`;
         }
+        html += '</tr></thead><tbody>';
 
-        function coalesce(...values) {
-            for (let v of values) {
-                if (v !== undefined && v !== null && v !== '') return v;
+        for (let row of rows) {
+            html += '<tr>';
+            for (let col of columns) {
+                let cell = row[col] !== undefined && row[col] !== null ? String(row[col]) : '';
+                html += `<td title="${escapeHtml(cell.substring(0, 80))}">${escapeHtml(cell.length > 70 ? cell.substring(0, 68) + '…' : cell)}</td>`;
             }
-            return '';
+            html += '</tr>';
+        }
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+    }
+
+    function generateDownloadButton(rows, columns, baseName) {
+        const div = document.getElementById('download');
+        if (!rows.length) {
+            div.innerHTML = '';
+            return;
         }
 
-        function displayPreview(rows, columns) {
-            const container = document.getElementById('preview');
-            if (rows.length === 0) {
-                container.innerHTML = '<p>No data to preview.</p>';
-                return;
-            }
-
-            let html = '<table><thead><tr>';
-            columns.forEach(col => html += `<th>${escapeHtml(col)}</th>`);
-            html += '</tr></thead><tbody>';
-
-            rows.forEach(row => {
-                html += '<tr>';
-                columns.forEach(col => html += `<td>${escapeHtml(row[col] || '')}</td>`);
-                html += '</tr>';
-            });
-            html += '</tbody></table>';
-            container.innerHTML = html;
+        // Build CSV content
+        const csvLines = [];
+        csvLines.push(columns.map(c => escapeCsvValue(c)).join(','));
+        
+        for (const row of rows) {
+            const line = columns.map(col => {
+                let val = row[col] ?? '';
+                return escapeCsvValue(String(val));
+            }).join(',');
+            csvLines.push(line);
         }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            return String(text).replace(/[&<>"]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                if (m === '"') return '&quot;';
-                return m;
-            });
+        
+        const csvString = csvLines.join('\n');
+        const blob = new Blob(["\uFEFF" + csvString], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        
+        div.innerHTML = `
+            <div style="margin-top: 0.5rem;">
+                <a href="${url}" download="${sanitizeFilename(baseName)}.csv" class="download-btn">
+                    ⬇️ Download ${escapeHtml(baseName)}.csv
+                </a>
+                <p style="font-size:0.75rem; margin-top: 8px;">✔️ 34 columns · Full compatibility with Excel/Google Sheets</p>
+            </div>
+        `;
+        
+        // revoke old object URLs to avoid memory leaks (optional but clean)
+        setTimeout(() => URL.revokeObjectURL(url), 15000);
+    }
+    
+    function escapeCsvValue(val) {
+        if (val === undefined || val === null) return '';
+        const stringVal = String(val);
+        if (stringVal.includes(',') || stringVal.includes('"') || stringVal.includes('\n') || stringVal.includes('\r')) {
+            return '"' + stringVal.replace(/"/g, '""') + '"';
         }
-
-        function showDownloadButton(rows, columns, baseName) {
-            const div = document.getElementById('download');
-            if (!rows.length) {
-                div.innerHTML = '';
-                return;
-            }
-
-            // Convert to CSV
-            const csvRows = [columns.join(',')];
-            rows.forEach(row => {
-                const values = columns.map(col => {
-                    let val = row[col] || '';
-                    // Escape quotes and wrap in quotes if contains comma or newline
-                    if (val.includes(',') || val.includes('"') || val.includes('\n')) {
-                        val = '"' + val.replace(/"/g, '""') + '"';
-                    }
-                    return val;
-                });
-                csvRows.push(values.join(','));
-            });
-
-            const csvString = csvRows.join('\n');
-            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            div.innerHTML = `<a href="${url}" download="${baseName}.csv" class="download-btn">📥 Download ${baseName}.csv</a>`;
-        }
-    </script>
+        return stringVal;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+            return c;
+        });
+    }
+    
+    function sanitizeFilename(name) {
+        return name.replace(/[^a-z0-9_\-]/gi, '_').substring(0, 60) || 'merged_playlist';
+    }
+    
+    // Additional helper: clear status on new file selection maybe (optional UX)
+    document.getElementById('file1').addEventListener('change', () => {
+        if(document.getElementById('status').innerHTML.includes('✅')) 
+            document.getElementById('status').innerHTML = '📁 New files selected — click merge.';
+    });
+    document.getElementById('file2').addEventListener('change', () => {
+        if(document.getElementById('status').innerHTML.includes('✅')) 
+            document.getElementById('status').innerHTML = '📁 New files selected — click merge.';
+    });
+</script>
 </body>
 </html>
